@@ -23,21 +23,7 @@ pathfind() {
 
 case "${1}" in
 	remove)
-		_USERNAME="ftp"
-		_GROUPNAME="${_USERNAME}"
 		_DIRECTORY="/srv/ftp"
-
-		pathfind deluser
-		if [ $? = 0 ] ;
-		then
-			deluser --quiet --system ${_USERNAME}
-		fi
-
-		pathfind delgroup
-		if [ $? = 0 ] ;
-		then
-			delgroup --quiet --system --only-if-empty ${_GROUPNAME} || true
-		fi
 
 		if [ -d "${_DIRECTORY}" ]
 		then
