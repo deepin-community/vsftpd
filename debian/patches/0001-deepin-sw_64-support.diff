@@ -1,0 +1,16 @@
+diff --git a/sysdeputil.c b/sysdeputil.c
+index f5640be..ca0fee0 100644
+--- a/sysdeputil.c
++++ b/sysdeputil.c
+@@ -1382,7 +1382,11 @@ vsf_sysutil_getpid_nocache(void)
+   /* Need to defeat the glibc pid caching because we need to hit a raw
+    * sys_clone() above.
+    */
++#ifdef __sw_64__
++  return syscall(__NR_getxpid);
++#else
+   return syscall(__NR_getpid);
++#endif
+ #else
+   return getpid();
+ #endif
